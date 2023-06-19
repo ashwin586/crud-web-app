@@ -1,0 +1,15 @@
+<%-include ('header')-%>
+<div class="d-flex justify-content-end me-3">
+  <form action="/logout" method="post">
+    <button class="btn btn-danger">Logout</button>
+  </form>
+</div>
+<div style="height: 100vh;" class="text-center d-flex justify-content-center align-items-center " id="login">
+  <div class="container w-25 rounded-4 py-5 card shadow">
+    <h3>
+      Welcome
+      <h5><%=locals.user ? user:"User"%></h5>
+    </h3>
+  </div>
+</div>
+<%-include ('footer')-%>

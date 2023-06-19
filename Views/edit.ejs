@@ -1,0 +1,93 @@
+<%-include('navbar')-%>
+    <div class="contrainer">
+        <div class="row">
+            <div class="col-lg-6 mx-auto mt-4">
+                <div class="card shadow">
+                    <div class="card-header bg-warning">
+                        <h3 class="text-light">Edit user</h3>
+                    </div>
+                    <div class="card-body p-4">
+                        <form action="/update/<%= user._id %>" method="post" id="add-form" onsubmit="validate(event)">
+                            <div class="mb-3">
+                                <label for="name">Name</label>
+                                <input type="text" name="name" class="form-control form-control-lg" id="name"
+                                    placeholder="Enter name" value="<%= user.name %>" required />
+                                <p id="nameError" class="error text-danger"></p>
+                            </div>
+                            <div class="mb-3">
+                                <label for="phone">Phone No</label>
+                                <input type="tel" name="phone" id="phone" placeholder="Enter phone"
+                                    class="form-control form-control-lg" value="<%= user.phone %>" required />
+                                <p id="phnoError" class="error text-danger"></p>
+                            </div>
+                            <div class="mb-3">
+                                <label for="email">Email</label>
+                                <input type="email" name="email" class="form-control form-control-lg" id="email"
+                                    placeholder="Enter email" value="<%= user.email %>" required />
+                                <p id="emailError" class="error text-danger"></p>
+                            </div>
+                            <div class="mb-3">
+                                <label for="password">Password</label>
+                                <input type="password" name="password" class="form-control form-control-lg"
+                                    id="password" placeholder="Enter Password" value="<%= user.password %>" required />
+                                <p id="psswdError" class="error text-danger"></p>
+                            </div>
+                            <div class="mb-3 d-grid">
+                                <input type="submit" name="submit" value="Update User"
+                                    class="btn btn-warning btn-lg w-25" />
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function validate() {
+          let name = document.getElementById("name").value;
+          let phno = document.getElementById("phone").value;
+          let email = document.getElementById("email").value;
+          let password = document.getElementById("password").value;
+          reg = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+          email_result = reg.test(email);
+          let isValid = true;
+      
+          document.getElementById("nameError").innerHTML = "";
+          document.getElementById("phnoError").innerHTML = "";
+          document.getElementById("emailError").innerHTML = "";
+          document.getElementById("psswdError").innerHTML = "";
+      
+          if (name.trim() === "") {
+            document.getElementById("nameError").innerHTML = "Name is required.";
+            isValid = false;
+          }
+          if (name.trim().includes("  ")) {
+            document.getElementById("nameError").innerHTML = "Invalid Naming, Unecessary spacing";
+            isValid = false;
+          }
+      
+          if (phno.length !== 10 || phno.length > 10 || isNaN(phno)) {
+            document.getElementById("phnoError").innerHTML =
+              "Invalid phone number. Phone number must be 10 digits.";
+            isValid = false;
+          }
+          if(phno.trim().includes(" ")){
+            document.getElementById("phnoError").innerHTML = "No spacing in between Phone numbers."
+          }
+      
+          if (email.trim() === "") {
+            document.getElementById("emailError").innerHTML = "Email is required.";
+            isValid = false;
+          } else if (!email_result) {
+            document.getElementById("emailError").innerHTML = "Provide correct Email";
+            isValid = false;
+          }
+      
+          if (!isValid) {
+            event.preventDefault();
+          }
+          return isValid;
+        }
+      </script>
+    <%-include('footer')-%>

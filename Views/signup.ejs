@@ -1,0 +1,122 @@
+<%-include('header')-%>
+<div
+  style="height: 100vh"
+  class="text-center d-flex justify-content-center align-items-center"
+>
+  <div class="container w-25 border border-success rounded-4 py-3 card shadow">
+    <div class="title pb-4">
+      <h2>Signup</h2>
+    </div>
+    <div>
+      <%if(error){%>
+      <p class="text-danger"><%= error%></p>
+      <%}%>
+    </div>
+    <form action="/signup" method="post" onsubmit="validate(event)">
+      <div class="form-group pb-4">
+        <input
+          type="text"
+          placeholder="Name"
+          name="name"
+          class="form-control"
+          id="name"
+          required
+        />
+        <p id="nameError" class="error text-danger"></p>
+      </div>
+      <div class="form-group pb-4">
+        <input
+          class="form-control"
+          type="tel"
+          placeholder="Phone Number"
+          name="phno"
+          id="phno"
+          required
+        />
+        <p id="phnoError" class="error text-danger"></p>
+      </div>
+      <div class="form-group pb-4">
+        <input
+          class="form-control"
+          name="email"
+          placeholder="Email"
+          type="email"
+          id="email"
+          required
+        />
+        <p id="emailError" class="error text-danger"></p>
+      </div>
+      <div class="form-group pb-4">
+        <input
+          class="form-control"
+          name="psswd"
+          id="psswd"
+          placeholder="Password"
+          type="password"
+          required
+        />
+        <p id="psswdError" class="error text-danger"></p>
+      </div>
+      <button type="submit" class="btn btn-success px-5 py-2 rounded-5">
+        Signup
+      </button>
+      <div class="pt-3 pb-2">Already an user <a href="/">Login</a></div>
+    </form>
+  </div>
+</div>
+<script>
+  function validate() {
+    let name = document.getElementById("name").value;
+    let phno = document.getElementById("phno").value;
+    let email = document.getElementById("email").value;
+    let password = document.getElementById("psswd").value;
+    reg = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+    email_result = reg.test(email);
+    let isValid = true;
+
+    document.getElementById("nameError").innerHTML = "";
+    document.getElementById("phnoError").innerHTML = "";
+    document.getElementById("emailError").innerHTML = "";
+    document.getElementById("psswdError").innerHTML = "";
+
+    if (name.trim() === "") {
+      document.getElementById("nameError").innerHTML = "Name is required.";
+      isValid = false;
+    }
+    if (name.trim().includes("  ")) {
+      document.getElementById("nameError").innerHTML =
+        "Invalid Naming, Unecessary spacing";
+      isValid = false;
+    }
+
+    if (phno.length !== 10 || phno.length > 10 || isNaN(phno)) {
+      document.getElementById("phnoError").innerHTML =
+        "Invalid phone number. Phone number must be 10 digits.";
+      isValid = false;
+    }
+    if (phno.trim().includes(" ")) {
+      document.getElementById("phnoError").innerHTML =
+        "No spacing in between Phone numbers.";
+    }
+
+    if (email.trim() === "") {
+      document.getElementById("emailError").innerHTML = "Email is required.";
+      isValid = false;
+    } else if (!email_result) {
+      document.getElementById("emailError").innerHTML = "Provide correct Email";
+      isValid = false;
+    }
+
+    if (password.length < 8) {
+      document.getElementById("psswdError").innerHTML =
+        "Password must be at least 8 characters.";
+      isValid = false;
+    }
+
+    if (!isValid) {
+      event.preventDefault();
+    }
+    return isValid;
+  }
+</script>
+<%-include('footer')-%>

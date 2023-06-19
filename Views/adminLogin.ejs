@@ -1,0 +1,29 @@
+<%-include('header')-%>
+    <div style="height: 100vh;" class="text-center d-flex justify-content-center align-items-center" id="login">
+        <div>
+            <%if(locals.logout){%>
+                <div class="alert alert-success text-center bg-success w-25 text-light">
+                    <%= logout%>
+                </div>
+                <%}%>
+        </div>
+        <div class="container w-25 rounded-4 py-3 card shadow">
+            <div class="title pb-4">
+                <h2 class="font-weight-bold">Administrator Login</h2>
+            </div>
+
+            <form action="/adminLogin" method="POST">
+                <div class="form-group pb-4">
+                    <input type="email" class="form-control" placeholder="Enter Admin Email" name="email" required />
+                </div>
+                <div class="form-group pb-4">
+                    <input class="form-control" type="password" placeholder="Enter Admin Password" name="password"
+                        required />
+                </div>
+                <button type="submit" class="btn btn-success px-5 py-2 rounded-5">
+                    Login
+                </button>
+            </form>
+        </div>
+    </div>
+    <%- include('footer')-%>

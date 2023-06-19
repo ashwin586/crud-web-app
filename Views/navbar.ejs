@@ -1,0 +1,33 @@
+<%-include('header')-%>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-success">
+        <div class="container">
+            <a href="/admin" class="navbar-brand"> <i class="fas fa-code me-2"></i>ADMINISTRATOR</a>
+            <button class="navbar-toggler" data-bs-target="#my-nav" data-bs-toggle="collapse" aria-controls="my-nav"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div id="my-nav" class="navbar-collapse collapse">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/admin">
+                            <i class="fas fa-home me-2"> Home</i>
+                        </a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/add_user">
+                            <i class="fas fa-user-plus me-2"> Add User</i>
+                        </a>
+                    </li>
+                    <li class="nav-item active">
+                        <!-- <form action="", method="post"> -->
+                            <a class="nav-link" href="/adminLogout">
+                                <i class="fas fa-power-off  me-2"> Logout</i>
+                            </a>
+                        <!-- </form> -->
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+    </nav>
+    <%-include('footer')-%>

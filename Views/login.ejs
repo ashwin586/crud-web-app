@@ -1,0 +1,67 @@
+<%-include('header')-%>
+<div
+  style="height: 100vh"
+  class="text-center d-flex justify-content-center align-items-center"
+  id="login"
+>
+  <div class="container w-25 border border-success rounded-4 py-3 card shadow">
+    <div class="title pb-4">
+      <h2 class="font-weight-bold">Login</h2>
+    </div>
+    <div>
+      <%if(error){%>
+      <p class="text-danger"><%= error%></p>
+      <%}%>
+    </div>
+    <form action="/login" method="POST">
+      <div class="form-group pb-4">
+        <input
+          type="email"
+          class="form-control"
+          placeholder="Email"
+          name="email"
+          required
+        />
+      </div>
+      <div class="form-group pb-4">
+        <input
+          id="pass"
+          class="form-control"
+          type="password"
+          placeholder="Password"
+          name="password"
+          required
+        />
+      </div>
+      <div class="pb-3 d-flex justify-content-start ps-1">
+        <input
+          id="showPass"
+          type="checkbox"
+          style="width: 20px"
+          onclick="showPassword()"
+        />
+        Show Password
+        <br />
+      </div>
+      <button type="submit" class="btn btn-success px-5 py-2 rounded-5">
+        Login
+      </button>
+      <p class="mt-3">Create a new Account <a href="/signup">Sign up</a></p>
+    </form>
+  </div>
+</div>
+
+<script>
+  function showPassword() {
+    var passwordInput = document.getElementById("pass");
+    var showPassCheckbox = document.getElementById("showPass");
+
+    if (showPassCheckbox.checked) {
+      passwordInput.type = "text";
+    } else {
+      passwordInput.type = "password";
+    }
+  }
+</script>
+
+<%-include('footer')-%>

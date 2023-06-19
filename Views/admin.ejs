@@ -1,0 +1,70 @@
+<%-include('navbar')-%>
+
+<div class="container">
+  <div class="row my-5">
+    <div class="d-flex justify-content-end pb-3">
+      <input class="outline-none px-2" id="search" placeholder="Search" />
+      <button
+        class="ms-2 fas fa-search bg-light"
+        onclick="searchUser()"
+        type="button"
+      ></button>
+    </div>
+    <div class="col-lg-12">
+      <div class="table-responsive">
+        <% if(users !='' ) {%>
+        <table class="table table-striped text-center shadow-sm">
+          <thead>
+            <tr class="table-success">
+              <th>ID</th>
+              <th>Name</th>
+              <th>Phone Number</th>
+              <th>E-mail</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% users.forEach((user, index)=> {%>
+            <tr>
+              <td><%= index %></td>
+              <td id="find"><%= user.name%></td>
+              <td><%= user.phone%></td>
+              <td><%= user.email%></td>
+              <td>
+                <a href="/edit/<%= user._id%>" class="text-success"
+                  ><i class="fas fa-edit fa-lg mx-1"></i
+                ></a>
+                <a href="/delete/<%= user._id%>" class="text-danger"
+                  ><i class="fas fa-trash fa-lg mx-1"></i
+                ></a>
+              </td>
+            </tr>
+            <% }); %>
+          </tbody>
+        </table>
+        <% } else { %>
+        <h1 class="text-center text-secondary mt-5">
+          No users found in the database!!
+        </h1>
+        <% } %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function searchUser() {
+    const searchValue = document.getElementById("search").value.toLowerCase();
+    const rows = document.querySelectorAll("table tbody tr");
+    rows.forEach((row) => {
+      let name = row.querySelector("#find").innerText.toLowerCase();
+      if (name === searchValue) {
+        row.style.display = "";
+      } else {
+        row.style.display = "none";
+      }
+    });
+  }
+</script>
+
+<%-include('footer') -%>
